@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--app-bg);
+  --color-foreground: var(--app-fg);
+  
+  --color-muted: var(--app-muted);
+  --color-muted-bg: var(--app-muted-bg);
+  
+  --color-border: var(--app-border);
+  
+  --color-primary: var(--app-primary);
+  --color-primary-fg: var(--app-primary-fg);
+  
+  --color-card: var(--app-card-bg);
+  --color-card-border: var(--app-card-border);
+}
+
+:root {
+  --app-bg: #ffffff;
+  --app-fg: #0f172a;
+  
+  --app-muted: #64748b;
+  --app-muted-bg: #f1f5f9;
+  
+  --app-border: #e2e8f0;
+  
+  --app-primary: #000000;
+  --app-primary-fg: #ffffff;
+  
+  --app-card-bg: #ffffff;
+  --app-card-border: #e2e8f0;
+  
+  --app-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --app-bg: #09090b; /* Very dark fumadocs bg */
+    --app-fg: #ededed;
+    
+    --app-muted: #a1a1aa;
+    --app-muted-bg: #27272a;
+    
+    --app-border: #27272a;
+    
+    --app-primary: #ffffff;
+    --app-primary-fg: #000000;
+    
+    --app-card-bg: #09090b;
+    --app-card-border: #27272a;
+    
+    --app-shadow: 0 4px 20px -2px rgba(0,0,0,0.5);
+  }
+}
+
+body {
+  background-color: var(--app-bg);
+  color: var(--app-fg);
+  overflow-x: hidden;
+}
+
+.glass-panel {
+  background: var(--app-card-bg);
+  border: 1px solid var(--app-card-border);
+  box-shadow: var(--app-shadow);
+}
+
+.glass-nav {
+  background: color-mix(in srgb, var(--app-bg) 80%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--app-border);
+}
+
+.ambient-bg {
+  display: none; /* dbxio doesn't use ambient glows, it's clean and minimal */
+}

@@ -1,0 +1,6 @@
+{
+  "name": "GitHub Stars AI Tools",
+  "description": "赋予您的 GitHub Stars 第二生命。通过智能化引擎重塑您的代码知识库，让每一次 Star 都能在需要时被精准召回。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
