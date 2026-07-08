@@ -17,14 +17,14 @@ const PLATFORMS: Platform[] = [
     name: 'macOS',
     arch: 'Apple Silicon (M1+)',
     format: '.dmg',
-    size: '~15 MB',
+    size: '~7.8 MB',
   },
   {
     icon: Monitor,
     name: 'macOS',
     arch: 'Intel',
     format: '.dmg',
-    size: '~16 MB',
+    size: '~8 MB',
   },
   {
     icon: Monitor,
