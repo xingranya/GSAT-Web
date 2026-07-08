@@ -30,7 +30,7 @@ const FEATURES: FeatureDetail[] = [
       '支持自定义标签、笔记和阅读状态',
       '通过私有 Gist 跨设备同步标注',
     ],
-    screenshot: '/screenshots/main.png',
+    screenshot: '/screenshots/mainpage.png',
     screenshotAlt: 'Stars 本地知识库主界面',
   },
   {
@@ -45,7 +45,7 @@ const FEATURES: FeatureDetail[] = [
       '右侧实时展示匹配仓库，支持分页',
       '基于上下文的连续追问',
     ],
-    screenshot: '/screenshots/ai-search.png',
+    screenshot: '/screenshots/aiResearch.png',
     screenshotAlt: '对话式 AI 搜索界面',
   },
   {
@@ -60,7 +60,7 @@ const FEATURES: FeatureDetail[] = [
       '知识卡片一目了然',
       'Token 用量追踪，成本可控',
     ],
-    screenshot: '/screenshots/readme.png',
+    screenshot: '/screenshots/Knowledge.png',
     screenshotAlt: 'README 智能解析界面',
   },
   {
@@ -75,7 +75,7 @@ const FEATURES: FeatureDetail[] = [
       '标签网络可视化展示',
       '按标签筛选和批量管理',
     ],
-    screenshot: '/screenshots/tag-network.png',
+    screenshot: '/screenshots/taps.png',
     screenshotAlt: 'AI 标签网络可视化',
   },
   {
@@ -90,7 +90,7 @@ const FEATURES: FeatureDetail[] = [
       '候选项目一键入库',
       '比较分析帮助决策',
     ],
-    screenshot: '/screenshots/settings.png',
+    screenshot: '/screenshots/setting.png',
     screenshotAlt: 'AI 服务与搜索配置',
   },
   {
@@ -105,7 +105,7 @@ const FEATURES: FeatureDetail[] = [
       'AI 生成的技术栈概述',
       '使用概览和数据统计',
     ],
-    screenshot: '/screenshots/welcome.png',
+    screenshot: '/screenshots/profile.png',
     screenshotAlt: '个人技术画像概览',
   },
 ];
