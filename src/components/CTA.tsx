@@ -11,7 +11,7 @@ export default function CTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-[18px] overflow-hidden bg-ink-heading p-[clamp(2.5rem,5vw,4rem)] text-center"
+          className="relative rounded-[18px] overflow-hidden bg-surface border border-border p-[clamp(2.5rem,5vw,4rem)] text-center"
         >
           {/* 背景光晕 */}
           <div
@@ -19,16 +19,16 @@ export default function CTA() {
             style={{
               width: '600px',
               height: '300px',
-              background: 'radial-gradient(ellipse, oklch(0.480 0.140 240 / 0.20), transparent 70%)',
-              filter: 'blur(60px)',
+              background: 'radial-gradient(ellipse, oklch(0.570 0.147 263 / 0.06), transparent 60%)',
+              filter: 'blur(80px)',
             }}
           />
 
           <div className="relative z-10 max-w-xl mx-auto">
-            <h2 className="font-heading text-[clamp(1.5rem,3vw,2rem)] font-extrabold text-background tracking-tight mb-4 text-balance">
+            <h2 className="font-heading text-[clamp(1.5rem,3vw,2rem)] font-extrabold text-ink-heading tracking-tight mb-4 text-balance">
               准备好重构您的星标库了吗？
             </h2>
-            <p className="text-[oklch(0.800 0.008 260)] text-sm leading-relaxed mb-8">
+            <p className="text-muted text-sm leading-relaxed mb-8">
               安全连接您的 GitHub 账户，仅需几秒钟，体验前所未有的知识管理方式。
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -41,13 +41,13 @@ export default function CTA() {
               </Link>
               <Link
                 to="/features"
-                className="bg-transparent text-background px-7 py-3.5 rounded-[10px] text-sm font-semibold border border-[oklch(0.350 0.012 260)] hover:border-[oklch(0.500 0.012 260)] transition-colors flex items-center justify-center gap-2"
+                className="bg-background text-foreground px-7 py-3.5 rounded-[10px] text-sm font-semibold border border-border hover:border-border-strong hover:bg-surface-hover transition-colors flex items-center justify-center gap-2"
               >
                 了解更多
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <p className="text-[oklch(0.550 0.010 260)] text-[11px] mt-5 font-mono">
+            <p className="text-muted/60 text-[11px] mt-5 font-mono">
               需要只读访问权限 · 随时可撤销 · PolyForm Noncommercial 许可
             </p>
           </div>
