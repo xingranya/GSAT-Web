@@ -38,8 +38,26 @@ function FeatureCard({ icon: Icon, title, description, preview, span, delay = 0 
 
 export default function Features() {
   return (
-    <section className="py-[clamp(3.5rem,7vw,6rem)]">
-      <div className="max-w-[1200px] mx-auto px-5 lg:px-8">
+    <section className="py-[clamp(3.5rem,7vw,6rem)] relative overflow-hidden">
+      {/* 背景模糊光斑 */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-[15%] right-[-5%] w-[500px] h-[500px]"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.570 0.147 263 / 0.05), transparent 60%)',
+            filter: 'blur(100px)',
+          }}
+        />
+        <div
+          className="absolute bottom-[10%] left-[-8%] w-[400px] h-[400px]"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.580 0.130 260 / 0.04), transparent 60%)',
+            filter: 'blur(100px)',
+          }}
+        />
+      </div>
+
+      <div className="relative max-w-[1200px] mx-auto px-5 lg:px-8">
         {/* 标题 */}
         <div className="text-center mb-14">
           <motion.h2
