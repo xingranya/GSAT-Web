@@ -13,7 +13,7 @@ function ProductMockup() {
     >
       <div className="rounded-[14px] border border-border-strong shadow-lg overflow-hidden">
         <img
-          src="/screenshots/main.png"
+          src="/screenshots/mainpage.png"
           alt="GitHub Stars AI 主界面 — 仓库知识库和 AI 分析"
           className="w-full h-auto block"
           loading="eager"
@@ -26,13 +26,32 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden">
       {/* 背景装饰 */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 50% at 50% 0%, oklch(0.480 0.140 240 / 0.06), transparent)',
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* 主光斑 */}
+        <div
+          className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px]"
+          style={{
+            background: 'radial-gradient(ellipse, oklch(0.570 0.147 263 / 0.10), transparent 65%)',
+            filter: 'blur(80px)',
+          }}
+        />
+        {/* 左侧冷色光斑 */}
+        <div
+          className="absolute top-[10%] left-[-5%] w-[400px] h-[400px]"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.580 0.130 260 / 0.07), transparent 60%)',
+            filter: 'blur(100px)',
+          }}
+        />
+        {/* 右侧暖色光斑 */}
+        <div
+          className="absolute top-[30%] right-[-8%] w-[350px] h-[350px]"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.660 0.165 263 / 0.06), transparent 60%)',
+            filter: 'blur(90px)',
+          }}
+        />
+      </div>
 
       <div className="relative max-w-[1200px] mx-auto px-5 lg:px-8 pt-20 pb-8 lg:pt-28 lg:pb-12">
         <div className="flex flex-col items-center text-center">
