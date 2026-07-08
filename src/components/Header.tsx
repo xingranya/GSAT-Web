@@ -1,36 +1,132 @@
-import { Star, LogIn, Rocket } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Github, Menu, X, Download } from 'lucide-react';
+import { NavLink, Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
+
+const NAV_ITEMS = [
+  { to: '/', label: '首页' },
+  { to: '/features', label: '功能' },
+  { to: '/architecture', label: '架构' },
+  { to: '/developer', label: '开发者' },
+  { to: '/download', label: '下载' },
+];
 
 export default function Header() {
-  const getNavClass = ({ isActive }: { isActive: boolean }) => 
-    isActive 
-      ? "text-foreground font-bold font-sans text-sm hover:opacity-80 transition-opacity"
-      : "text-muted hover:text-foreground transition-colors font-sans text-sm";
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // 移动端菜单打开时锁定滚动
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
+  const getNavClass = ({ isActive }: { isActive: boolean }) =>
+    isActive
+      ? 'text-primary font-semibold text-sm transition-colors'
+      : 'text-muted hover:text-foreground transition-colors text-sm';
 
   return (
     <header className="fixed top-0 w-full z-50 glass-nav">
-      <div className="flex justify-between items-center h-16 px-6 lg:px-8 max-w-[1180px] mx-auto">
-        <div className="flex items-center gap-2">
-          <Star className="text-primary w-6 h-6" fill="currentColor" />
-          <span className="font-heading text-xl font-[820] text-foreground tracking-tight">GitHub Stars AI</span>
-        </div>
-        
-        <nav className="hidden md:flex items-center gap-8">
-          <NavLink className={getNavClass} to="/">首页</NavLink>
-          <NavLink className={getNavClass} to="/architecture">技术架构</NavLink>
-          <NavLink className={getNavClass} to="/developer">开发者中心</NavLink>
-          <a className="text-muted hover:text-foreground transition-colors font-sans text-sm" href="#">开源社区</a>
+      <div className="flex justify-between items-center h-16 px-5 lg:px-8 max-w-[1200px] mx-auto">
+        {/* 品牌 */}
+        <Link to="/" className="flex items-center gap-2.5 group">
+          <img src="/icon.svg" alt="GSAT" className="w-8 h-8 rounded-lg group-hover:scale-105 transition-transform" />
+          <span className="font-heading text-lg font-bold text-ink-heading tracking-tight">
+            GitHub Stars AI
+          </span>
+        </Link>
+
+        {/* 桌面导航 */}
+        <nav className="hidden md:flex items-center gap-7">
+          {NAV_ITEMS.map(item => (
+            <NavLink key={item.to} className={getNavClass} to={item.to} end={item.to === '/'}>
+              {item.label}
+            </NavLink>
+          ))}
         </nav>
-        
-        <div className="flex items-center gap-4">
-          <button className="hidden md:flex items-center gap-2 text-muted hover:text-foreground transition-colors font-heading text-sm font-bold cursor-pointer">
-            <LogIn className="w-4 h-4" /> 登录
-          </button>
-          <button className="bg-primary text-primary-fg px-4 py-2 rounded-full font-heading text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer">
-            <Rocket className="w-4 h-4" /> 立即体验
+
+        {/* 右侧操作 */}
+        <div className="flex items-center gap-3">
+          <a
+            href="https://github.com/xingranya/GitHub-Stars-AI-Tools"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-1.5 text-muted hover:text-foreground transition-colors text-sm"
+            aria-label="GitHub 仓库"
+          >
+            <Github className="w-[18px] h-[18px]" />
+          </a>
+          <Link
+            to="/download"
+            className="hidden md:flex items-center gap-1.5 bg-primary text-primary-fg px-4 py-2 rounded-[10px] text-sm font-semibold hover:bg-primary-hover transition-colors"
+          >
+            <Download className="w-4 h-4" />
+            下载
+          </Link>
+
+          {/* 移动端菜单按钮 */}
+          <button
+            className="md:hidden flex items-center justify-center w-9 h-9 text-foreground cursor-pointer"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? '关闭菜单' : '打开菜单'}
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
+
+      {/* 移动端全屏菜单 */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden fixed inset-0 top-16 bg-background z-40 border-t border-border"
+          >
+            <nav className="flex flex-col p-6 gap-1">
+              {NAV_ITEMS.map(item => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.to === '/'}
+                  onClick={() => setMobileOpen(false)}
+                  className={({ isActive }) =>
+                    `px-4 py-3 rounded-[10px] text-base font-medium transition-colors ${
+                      isActive
+                        ? 'bg-primary-soft text-primary'
+                        : 'text-foreground hover:bg-muted-bg'
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+
+              <div className="mt-4 pt-4 border-t border-border flex flex-col gap-3">
+                <a
+                  href="https://github.com/xingranya/GitHub-Stars-AI-Tools"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-3 text-muted hover:text-foreground transition-colors"
+                >
+                  <Github className="w-5 h-5" />
+                  GitHub 仓库
+                </a>
+                <Link
+                  to="/download"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 bg-primary text-primary-fg px-6 py-3 rounded-[10px] font-semibold"
+                >
+                  <Download className="w-4 h-4" />
+                  下载应用
+                </Link>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

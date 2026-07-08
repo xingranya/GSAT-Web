@@ -1,83 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;450;500;550;600;650;700;750;800&display=swap');
 @import "tailwindcss";
 
+/* ——— Tailwind v4 主题令牌 ——— */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "JetBrains Mono", monospace;
 
-  --color-background: var(--app-bg);
-  --color-foreground: var(--app-fg);
-  
-  --color-muted: var(--app-muted);
-  --color-muted-bg: var(--app-muted-bg);
-  
-  --color-border: var(--app-border);
-  
-  --color-primary: var(--app-primary);
-  --color-primary-fg: var(--app-primary-fg);
-  
-  --color-card: var(--app-card-bg);
-  --color-card-border: var(--app-card-border);
+  --color-background: var(--c-bg);
+  --color-foreground: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-muted-bg: var(--c-surface);
+  --color-border: var(--c-border);
+  --color-primary: var(--c-primary);
+  --color-primary-fg: var(--c-text-on-primary);
+  --color-card: var(--c-surface);
+  --color-card-border: var(--c-border);
 }
 
+/* ——— OKLCH 色彩系统：知识蓝 ——— */
 :root {
-  --app-bg: #ffffff;
-  --app-fg: #0f172a;
-  
-  --app-muted: #64748b;
-  --app-muted-bg: #f1f5f9;
-  
-  --app-border: #e2e8f0;
-  
-  --app-primary: #000000;
-  --app-primary-fg: #ffffff;
-  
-  --app-card-bg: #ffffff;
-  --app-card-border: #e2e8f0;
-  
-  --app-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
+  /* 品牌主色：知识蓝 (hue 240) */
+  --c-bg: oklch(1.000 0 0);
+  --c-surface: oklch(0.975 0.004 260);
+  --c-surface-hover: oklch(0.958 0.007 260);
+  --c-ink: oklch(0.145 0.008 260);
+  --c-ink-heading: oklch(0.115 0.012 260);
+  --c-primary: oklch(0.480 0.140 240);
+  --c-primary-hover: oklch(0.420 0.135 240);
+  --c-primary-soft: oklch(0.945 0.025 260);
+  --c-accent: oklch(0.580 0.130 260);
+  --c-accent-soft: oklch(0.950 0.018 260);
+  --c-muted: oklch(0.470 0.015 260);
+  --c-border: oklch(0.910 0.007 260);
+  --c-border-strong: oklch(0.830 0.010 260);
+  --c-text-on-primary: oklch(0.985 0 0);
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px oklch(0.200 0.015 260 / 0.04);
+  --shadow-md: 0 4px 16px oklch(0.200 0.015 260 / 0.06);
+  --shadow-lg: 0 8px 32px oklch(0.200 0.015 260 / 0.08);
+  --shadow-glow: 0 0 24px oklch(0.480 0.140 240 / 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --app-bg: #09090b; /* Very dark fumadocs bg */
-    --app-fg: #ededed;
-    
-    --app-muted: #a1a1aa;
-    --app-muted-bg: #27272a;
-    
-    --app-border: #27272a;
-    
-    --app-primary: #ffffff;
-    --app-primary-fg: #000000;
-    
-    --app-card-bg: #09090b;
-    --app-card-border: #27272a;
-    
-    --app-shadow: 0 4px 20px -2px rgba(0,0,0,0.5);
+    --c-bg: oklch(0.090 0.008 260);
+    --c-surface: oklch(0.135 0.010 260);
+    --c-surface-hover: oklch(0.170 0.012 260);
+    --c-ink: oklch(0.900 0.006 260);
+    --c-ink-heading: oklch(0.960 0.004 260);
+    --c-primary: oklch(0.640 0.165 240);
+    --c-primary-hover: oklch(0.710 0.170 240);
+    --c-primary-soft: oklch(0.170 0.035 240);
+    --c-accent: oklch(0.720 0.120 260);
+    --c-accent-soft: oklch(0.160 0.025 260);
+    --c-muted: oklch(0.580 0.015 260);
+    --c-border: oklch(0.220 0.012 260);
+    --c-border-strong: oklch(0.300 0.015 260);
+    --c-text-on-primary: oklch(0.985 0 0);
+
+    --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.20);
+    --shadow-md: 0 4px 16px oklch(0 0 0 / 0.30);
+    --shadow-lg: 0 8px 32px oklch(0 0 0 / 0.40);
+    --shadow-glow: 0 0 24px oklch(0.640 0.165 240 / 0.15);
   }
 }
 
+/* ——— 基础样式 ——— */
 body {
-  background-color: var(--app-bg);
-  color: var(--app-fg);
+  background-color: var(--c-bg);
+  color: var(--c-ink);
   overflow-x: hidden;
+  font-feature-settings: "ss01", "ss02", "cv01";
 }
 
+::selection {
+  background: oklch(0.480 0.140 240 / 0.20);
+  color: var(--c-ink);
+}
+
+/* ——— 卡片 & 导航 ——— */
 .glass-panel {
-  background: var(--app-card-bg);
-  border: 1px solid var(--app-card-border);
-  box-shadow: var(--app-shadow);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .glass-nav {
-  background: color-mix(in srgb, var(--app-bg) 80%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--app-border);
+  background: color-mix(in srgb, var(--c-bg) 82%, transparent);
+  backdrop-filter: blur(16px) saturate(1.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8);
+  border-bottom: 1px solid var(--c-border);
 }
 
-.ambient-bg {
-  display: none; /* dbxio doesn't use ambient glows, it's clean and minimal */
+/* ——— 工具类 ——— */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ——— 减少动画 ——— */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
