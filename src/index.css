@@ -24,19 +24,19 @@
   --color-card-border: var(--c-border);
 }
 
-/* ——— OKLCH 色彩系统：知识蓝 ——— */
+/* ——— OKLCH 色彩系统：品牌蓝 #3C82F6 ——— */
 :root {
-  /* 品牌主色：知识蓝 (hue 240) */
+  /* 品牌主色 #3C82F6 → oklch(0.570 0.147 263) */
   --c-bg: oklch(1.000 0 0);
   --c-surface: oklch(0.975 0.004 260);
   --c-surface-hover: oklch(0.958 0.007 260);
   --c-ink: oklch(0.145 0.008 260);
   --c-ink-heading: oklch(0.115 0.012 260);
-  --c-primary: oklch(0.480 0.140 240);
-  --c-primary-hover: oklch(0.420 0.135 240);
-  --c-primary-soft: oklch(0.945 0.025 260);
-  --c-accent: oklch(0.580 0.130 260);
-  --c-accent-soft: oklch(0.950 0.018 260);
+  --c-primary: oklch(0.570 0.147 263);
+  --c-primary-hover: oklch(0.510 0.142 263);
+  --c-primary-soft: oklch(0.950 0.025 263);
+  --c-accent: oklch(0.650 0.165 263);
+  --c-accent-soft: oklch(0.950 0.020 263);
   --c-muted: oklch(0.470 0.015 260);
   --c-border: oklch(0.910 0.007 260);
   --c-border-strong: oklch(0.830 0.010 260);
@@ -46,7 +46,7 @@
   --shadow-sm: 0 1px 3px oklch(0.200 0.015 260 / 0.04);
   --shadow-md: 0 4px 16px oklch(0.200 0.015 260 / 0.06);
   --shadow-lg: 0 8px 32px oklch(0.200 0.015 260 / 0.08);
-  --shadow-glow: 0 0 24px oklch(0.480 0.140 240 / 0.12);
+  --shadow-glow: 0 0 24px oklch(0.570 0.147 263 / 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -56,11 +56,11 @@
     --c-surface-hover: oklch(0.170 0.012 260);
     --c-ink: oklch(0.900 0.006 260);
     --c-ink-heading: oklch(0.960 0.004 260);
-    --c-primary: oklch(0.640 0.165 240);
-    --c-primary-hover: oklch(0.710 0.170 240);
-    --c-primary-soft: oklch(0.170 0.035 240);
-    --c-accent: oklch(0.720 0.120 260);
-    --c-accent-soft: oklch(0.160 0.025 260);
+    --c-primary: oklch(0.660 0.165 263);
+    --c-primary-hover: oklch(0.730 0.170 263);
+    --c-primary-soft: oklch(0.180 0.035 263);
+    --c-accent: oklch(0.740 0.140 263);
+    --c-accent-soft: oklch(0.170 0.025 263);
     --c-muted: oklch(0.580 0.015 260);
     --c-border: oklch(0.220 0.012 260);
     --c-border-strong: oklch(0.300 0.015 260);
@@ -69,7 +69,7 @@
     --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.20);
     --shadow-md: 0 4px 16px oklch(0 0 0 / 0.30);
     --shadow-lg: 0 8px 32px oklch(0 0 0 / 0.40);
-    --shadow-glow: 0 0 24px oklch(0.640 0.165 240 / 0.15);
+    --shadow-glow: 0 0 24px oklch(0.660 0.165 263 / 0.15);
   }
 }
 
@@ -82,7 +82,7 @@ body {
 }
 
 ::selection {
-  background: oklch(0.480 0.140 240 / 0.20);
+  background: oklch(0.570 0.147 263 / 0.20);
   color: var(--c-ink);
 }
 
@@ -94,10 +94,10 @@ body {
 }
 
 .glass-nav {
-  background: color-mix(in srgb, var(--c-bg) 82%, transparent);
-  backdrop-filter: blur(16px) saturate(1.8);
-  -webkit-backdrop-filter: blur(16px) saturate(1.8);
-  border-bottom: 1px solid var(--c-border);
+  background: color-mix(in srgb, var(--c-bg) 75%, transparent);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-bottom: 1px solid color-mix(in srgb, var(--c-border) 70%, transparent);
 }
 
 /* ——— 工具类 ——— */
