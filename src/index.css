@@ -14,6 +14,12 @@
   --color-border: var(--c-border);
   --color-primary: var(--c-primary);
   --color-primary-fg: var(--c-text-on-primary);
+  --color-primary-hover: var(--c-primary-hover);
+  --color-primary-soft: var(--c-primary-soft);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-ink-heading: var(--c-ink-heading);
+  --color-border-strong: var(--c-border-strong);
   --color-card: var(--c-surface);
   --color-card-border: var(--c-border);
 }
