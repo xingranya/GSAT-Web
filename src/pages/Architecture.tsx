@@ -1,143 +1,159 @@
-import { Cpu, Network, Languages, Sparkles } from 'lucide-react';
+import { Cpu, Database, Layers, Shield, Zap, Globe } from 'lucide-react';
 import { motion } from 'motion/react';
+import type { LucideIcon } from 'lucide-react';
+import CTA from '../components/CTA';
+
+interface ArchCard {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  tags: string[];
+  span?: 'full';
+}
+
+const ARCH_CARDS: ArchCard[] = [
+  {
+    icon: Cpu,
+    title: '多 AI 提供商抽象层',
+    description:
+      '统一的 Provider 接口，支持 OpenAI、Anthropic 及任何 OpenAI 兼容端点（DeepSeek、Moonshot/Kimi、Qwen、GLM、Silicon Flow）。业务逻辑从不依赖特定供应商 SDK，一键切换模型。',
+    tags: ['Provider 抽象', '流式输出', 'Token 计量', 'Ollama / LM Studio'],
+  },
+  {
+    icon: Database,
+    title: 'SQLite 本地存储引擎',
+    description:
+      '基于 rusqlite 的嵌入式数据库，8 张核心表覆盖仓库元数据、README 缓存、AI 文档、向量嵌入、标签关系和任务队列。FTS5 全文索引加速搜索，内容哈希实现幂等处理。',
+    tags: ['SQLite FTS5', 'Schema 迁移', '内容哈希去重', '幂等任务'],
+  },
+  {
+    icon: Layers,
+    title: '三层数据分离架构',
+    description:
+      'GitHub 事实层（仓库元数据）、用户标注层（标签、笔记、阅读状态）和 AI 分析层（摘要、关键词、嵌入向量）完全解耦。同步不覆盖用户数据，AI 更新不影响手动标注。',
+    tags: ['事实 / 标注 / 分析', '独立存储', '互不干扰'],
+    span: 'full',
+  },
+  {
+    icon: Shield,
+    title: '安全与隐私设计',
+    description:
+      'GitHub Token 存储在操作系统凭证管理器（macOS Keychain / Windows 凭据管理器 / Linux Secret Service），绝不写入文件或 localStorage。用户笔记默认不发送给 AI。',
+    tags: ['系统凭证管理', '只读权限', '本地优先', '数据不出设备'],
+  },
+  {
+    icon: Zap,
+    title: '后台任务引擎',
+    description:
+      '独立的 Worker 模块编排后台任务：Stars 同步、README 缓存、AI 摘要生成、Gist 同步、相似项目推荐。支持重试、幂等键和批量暂停恢复。',
+    tags: ['任务队列', '断点续传', '幂等处理', '批量控制'],
+  },
+  {
+    icon: Globe,
+    title: '跨平台桌面应用',
+    description:
+      '基于 Tauri 2 构建，原生支持 macOS（Apple Silicon + Intel）、Windows 和 Linux。Rust 后端性能强劲，前端 React 19 保证流畅交互。应用内自动更新，签名校验安全分发。',
+    tags: ['Tauri 2', 'macOS / Windows / Linux', '自动更新', '签名校验'],
+    span: 'full',
+  },
+];
 
 export default function Architecture() {
   return (
-    <div className="py-12">
-      <header className="text-center max-w-3xl mx-auto mb-16">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="font-heading text-4xl md:text-5xl text-foreground font-[820] mb-6 tracking-tight"
-        >
-          探索核心技术架构
-        </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="font-sans text-[17px] text-muted leading-[1.8]"
-        >
-          深入了解驱动 GitHub Stars AI 的底层技术。我们结合了先进的 Transformer 架构、高效的向量检索与深度自然语言处理，为您提供卓越的代码分析与搜索体验。
-        </motion.p>
-      </header>
-
-      <div className="flex flex-col gap-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card 1 */}
-          <motion.section 
+    <>
+      {/* 页面标题 */}
+      <section className="max-w-[1200px] mx-auto px-5 lg:px-8 pt-12 lg:pt-20 pb-4">
+        <div className="text-center max-w-2xl mx-auto">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="glass-panel p-8 rounded-2xl flex flex-col gap-6 relative overflow-hidden group hover:shadow-xl transition-shadow"
+            transition={{ duration: 0.5 }}
+            className="font-heading text-[clamp(2rem,4vw,3rem)] font-extrabold text-ink-heading tracking-tight text-balance"
           >
-            <div className="flex items-center gap-4 z-10">
-              <div className="p-3 bg-muted-bg text-foreground rounded-xl border border-border">
-                <Cpu className="w-6 h-6" />
-              </div>
-              <h2 className="font-heading text-2xl font-[780] text-foreground">下一代 AI 分析引擎</h2>
-            </div>
-            <p className="font-sans text-[15px] text-muted leading-[1.6] z-10">
-              基于最新的 Transformer 架构深度优化的代码分析引擎。不仅能理解代码语法，更能洞察代码背后的设计意图和架构逻辑，实现真正意义上的语义级代码理解。
-            </p>
-            
-            <div className="mt-4 flex-grow bg-background rounded-xl border border-border p-6 flex flex-col gap-4 z-10 relative overflow-hidden">
-              <div className="w-full h-32 flex justify-between items-end gap-3 px-2 pb-2 border-b border-border relative">
-                <div className="w-1/5 bg-foreground/20 rounded-t-md h-12 relative overflow-hidden group-hover:h-16 transition-all duration-300"></div>
-                <div className="w-1/5 bg-foreground/40 rounded-t-md h-20 relative overflow-hidden group-hover:h-24 transition-all duration-300"></div>
-                <div className="w-1/5 bg-foreground/60 rounded-t-md h-24 relative overflow-hidden group-hover:h-32 transition-all duration-300"></div>
-                <div className="w-1/5 bg-foreground/80 rounded-t-md h-16 relative overflow-hidden group-hover:h-20 transition-all duration-300"></div>
-                <div className="w-1/5 bg-foreground rounded-t-md h-32 relative overflow-hidden"></div>
-              </div>
-              <div className="flex justify-between text-center font-mono text-[10px] text-muted z-10 uppercase tracking-wider">
-                <span>解析</span>
-                <span>分词</span>
-                <span>编码</span>
-                <span>注意力</span>
-                <span className="text-foreground font-[780] flex items-center gap-1 justify-center">
-                  <Sparkles className="w-3 h-3" />语义提取
-                </span>
-              </div>
-            </div>
-          </motion.section>
-
-          {/* Card 2 */}
-          <motion.section 
+            核心技术架构
+          </motion.h1>
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="glass-panel p-8 rounded-2xl flex flex-col gap-6 group hover:shadow-xl transition-shadow"
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="text-muted text-[clamp(0.95rem,1.3vw,1.06rem)] mt-4 leading-relaxed"
           >
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-muted-bg text-foreground rounded-xl border border-border">
-                <Network className="w-6 h-6" />
-              </div>
-              <h2 className="font-heading text-2xl font-[780] text-foreground">大规模向量索引</h2>
-            </div>
-            <p className="font-sans text-[15px] text-muted leading-[1.6]">
-              采用优化的 HNSW (Hierarchical Navigable Small World) 算法，构建高效的多层图结构索引。在亿级代码向量库中实现毫秒级响应，确保搜索过程既精准又迅速。
-            </p>
-            
-            <div className="mt-auto h-48 bg-background rounded-xl border border-border relative overflow-hidden p-4 flex items-center justify-center">
-              <Network className="w-32 h-32 text-foreground opacity-20" strokeWidth={1} />
-            </div>
-          </motion.section>
+            Tauri 2 + Rust + React 19 + SQLite——本地优先的现代桌面应用架构，
+            每一层都为性能、安全和可扩展性而设计。
+          </motion.p>
         </div>
+      </section>
 
-        {/* Card 3 */}
-        <motion.section 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="glass-panel p-8 rounded-2xl flex flex-col md:flex-row gap-8 items-center group hover:shadow-xl transition-shadow"
+      {/* 架构卡片网格 */}
+      <section className="max-w-[1200px] mx-auto px-5 lg:px-8 py-[clamp(2rem,4vw,3rem)]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {ARCH_CARDS.map((card, i) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.55, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+              className={`glass-panel rounded-[14px] p-7 flex flex-col group hover:border-primary/25 hover:shadow-[var(--shadow-glow)] transition-all duration-300 ${
+                card.span === 'full' ? 'md:col-span-2' : ''
+              }`}
+            >
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-10 h-10 rounded-[10px] bg-primary-soft flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                  <card.icon className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h2 className="font-heading text-lg font-bold text-ink-heading">{card.title}</h2>
+                </div>
+              </div>
+              <p className="text-sm text-muted leading-relaxed mb-5 flex-grow">{card.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {card.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-primary-soft text-primary border border-primary/10"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* 技术栈总览 */}
+      <section className="max-w-[1200px] mx-auto px-5 lg:px-8 py-[clamp(3rem,6vw,5rem)]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="bg-surface rounded-[14px] border border-border overflow-hidden"
         >
-          <div className="flex-1 flex flex-col gap-6">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-muted-bg text-foreground rounded-xl border border-border">
-                <Languages className="w-6 h-6" />
-              </div>
-              <h2 className="font-heading text-2xl font-[780] text-foreground">上下文感知语义分析</h2>
-            </div>
-            <p className="font-sans text-[15px] text-muted leading-[1.6]">
-              打破传统的关键字匹配限制。我们的自然语言处理模块能够理解开发者的真实查询意图，结合代码上下文、文档注释以及社区讨论，提供智能化、贴合实际开发场景的深度搜索结果。
-            </p>
-            <div className="flex flex-wrap gap-3 mt-2">
-              <span className="px-4 py-1.5 bg-background text-foreground font-sans text-[13px] font-[520] rounded-full border border-border">
-                意图识别
-              </span>
-              <span className="px-4 py-1.5 bg-background text-foreground font-sans text-[13px] font-[520] rounded-full border border-border">
-                跨语言映射
-              </span>
-              <span className="px-4 py-1.5 bg-background text-foreground font-sans text-[13px] font-[520] rounded-full border border-border">
-                领域词库
-              </span>
-            </div>
+          <div className="p-7 border-b border-border">
+            <h3 className="font-heading text-lg font-bold text-ink-heading">技术栈总览</h3>
           </div>
-          <div className="flex-1 w-full bg-background rounded-xl border border-border p-6 relative">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-3 p-4 bg-muted-bg rounded-lg border border-border">
-                <Sparkles className="w-4 h-4 text-foreground" />
-                <span className="font-mono text-[13px] text-foreground">"如何在 React 中处理复杂的全局状态并持久化？"</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border">
+            {[
+              { layer: '桌面框架', tech: 'Tauri 2', detail: 'Rust 后端 + WebView 前端' },
+              { layer: '前端', tech: 'React 19 + Vite + Tailwind CSS 4', detail: 'TypeScript, shadcn/ui' },
+              { layer: '后端', tech: 'Rust (2021 Edition)', detail: 'reqwest, rusqlite, keyring' },
+              { layer: '存储', tech: 'SQLite (bundled)', detail: 'FTS5 全文索引, 8 张核心表' },
+              { layer: 'AI 集成', tech: '多 Provider 抽象', detail: 'OpenAI / Anthropic / 兼容端点' },
+              { layer: '分发', tech: 'GitHub Actions CI/CD', detail: 'macOS · Windows · Linux' },
+            ].map(item => (
+              <div key={item.layer} className="p-5">
+                <div className="text-[11px] font-medium text-muted uppercase tracking-wider mb-1">{item.layer}</div>
+                <div className="text-sm font-semibold text-foreground">{item.tech}</div>
+                <div className="text-xs text-muted mt-0.5">{item.detail}</div>
               </div>
-              
-              <div className="grid grid-cols-3 gap-3 text-center mt-2">
-                <div className="bg-muted-bg p-3 rounded-xl border border-border">
-                  <span className="block font-sans text-[11px] font-[780] text-foreground mb-1">技术栈</span>
-                  <span className="font-sans text-[12px] text-muted">React, Redux</span>
-                </div>
-                <div className="bg-muted-bg p-3 rounded-xl border border-border">
-                  <span className="block font-sans text-[11px] font-[780] text-foreground mb-1">核心意图</span>
-                  <span className="font-sans text-[12px] text-muted">状态管理</span>
-                </div>
-                <div className="bg-muted-bg p-3 rounded-xl border border-border">
-                  <span className="block font-sans text-[11px] font-[780] text-foreground mb-1">场景</span>
-                  <span className="font-sans text-[12px] text-muted">复杂全局状态</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-        </motion.section>
-      </div>
-    </div>
+        </motion.div>
+      </section>
+
+      <CTA />
+    </>
   );
 }
