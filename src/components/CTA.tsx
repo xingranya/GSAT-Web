@@ -2,19 +2,23 @@ import { Github, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 
+/** 缓动曲线：快速启动，平滑收束 */
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 export default function CTA() {
   return (
     <section className="py-[clamp(3.5rem,7vw,6rem)]">
       <div className="max-w-[1200px] mx-auto px-5 lg:px-8">
+        {/* 整体 scale-in 收拢效果 */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: EASE }}
           className="relative rounded-[18px] overflow-hidden bg-surface border border-border p-[clamp(2.5rem,5vw,4rem)] text-center"
         >
-          {/* 背景光晕 */}
-          <div
+          {/* 背景光晕：带呼吸脉动 */}
+          <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             style={{
               width: '600px',
@@ -22,6 +26,8 @@ export default function CTA() {
               background: 'radial-gradient(ellipse, oklch(0.570 0.147 263 / 0.06), transparent 60%)',
               filter: 'blur(80px)',
             }}
+            animate={{ opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
           />
 
           <div className="relative z-10 max-w-xl mx-auto">
