@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Github, Menu, X, Download } from 'lucide-react';
+import { Github, Menu, X, Download, BookOpen } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -47,6 +47,16 @@ export default function Header() {
 
         {/* 右侧操作 */}
         <div className="flex items-center gap-3">
+          <a
+            href="https://github.com/xingranya/GitHub-Stars-AI-Tools/wiki"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-1.5 text-muted hover:text-foreground transition-colors text-sm"
+            aria-label="Wiki 文档"
+          >
+            <BookOpen className="w-[18px] h-[18px]" />
+            <span>Wiki</span>
+          </a>
           <a
             href="https://github.com/xingranya/GitHub-Stars-AI-Tools"
             target="_blank"
@@ -106,6 +116,16 @@ export default function Header() {
               ))}
 
               <div className="mt-4 pt-4 border-t border-border flex flex-col gap-3">
+                <a
+                  href="https://github.com/xingranya/GitHub-Stars-AI-Tools/wiki"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 px-4 py-3 text-muted hover:text-foreground transition-colors"
+                >
+                  <BookOpen className="w-5 h-5" />
+                  Wiki 文档
+                </a>
                 <a
                   href="https://github.com/xingranya/GitHub-Stars-AI-Tools"
                   target="_blank"

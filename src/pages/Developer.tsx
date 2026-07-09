@@ -44,7 +44,7 @@ export default function Developer() {
               title: '项目文档',
               description: '包含产品规格、技术架构、里程碑规划和模块清单等完整的项目文档。',
               action: '查看文档',
-              href: 'https://github.com/xingranya/GitHub-Stars-AI-Tools/tree/main/docs',
+              href: 'https://github.com/xingranya/GitHub-Stars-AI-Tools/wiki',
               external: true,
             },
             {

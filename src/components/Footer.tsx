@@ -15,6 +15,11 @@ const FOOTER_LINKS = [
     links: [
       { label: '开发者中心', to: '/developer' },
       {
+        label: 'Wiki 文档',
+        href: 'https://github.com/xingranya/GitHub-Stars-AI-Tools/wiki',
+        external: true,
+      },
+      {
         label: 'GitHub 仓库',
         href: 'https://github.com/xingranya/GitHub-Stars-AI-Tools',
         external: true,
