@@ -24,8 +24,8 @@ const FOOTER_LINKS = [
   {
     title: '法律',
     links: [
-      { label: '开源许可', href: '#' },
-      { label: '隐私政策', href: '#' },
+      { label: '开源许可', to: '/license' },
+      { label: '隐私政策', to: '/privacy' },
     ],
   },
 ];

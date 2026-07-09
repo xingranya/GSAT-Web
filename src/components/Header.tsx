@@ -55,6 +55,7 @@ export default function Header() {
             aria-label="GitHub 仓库"
           >
             <Github className="w-[18px] h-[18px]" />
+            <span>GitHub</span>
           </a>
           <Link
             to="/download"
@@ -109,6 +110,7 @@ export default function Header() {
                   href="https://github.com/xingranya/GitHub-Stars-AI-Tools"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-2 px-4 py-3 text-muted hover:text-foreground transition-colors"
                 >
                   <Github className="w-5 h-5" />
