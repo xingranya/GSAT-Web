@@ -114,4 +114,9 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  /* 彻底禁用 pulse 类动画，避免 infinite 覆盖后仍闪烁 */
+  .animate-pulse {
+    animation: none !important;
+  }
 }

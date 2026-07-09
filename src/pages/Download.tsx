@@ -2,12 +2,15 @@ import { Monitor, Laptop, Download as DownloadIcon, Shield, AlertTriangle, Exter
 import { motion } from 'motion/react';
 import type { LucideIcon } from 'lucide-react';
 
+const RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.1.2';
+
 interface Platform {
   icon: LucideIcon;
   name: string;
   arch: string;
   format: string;
   size: string;
+  href: string;
   note?: string;
 }
 
@@ -17,7 +20,8 @@ const PLATFORMS: Platform[] = [
     name: 'macOS',
     arch: 'Apple Silicon (M1+)',
     format: '.dmg',
-    size: '~7.8 MB',
+    size: '~7.6 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_aarch64.dmg`,
   },
   {
     icon: Monitor,
@@ -25,20 +29,23 @@ const PLATFORMS: Platform[] = [
     arch: 'Intel',
     format: '.dmg',
     size: '~8 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_x64.dmg`,
   },
   {
     icon: Monitor,
     name: 'Windows',
     arch: 'x64',
     format: '.exe (NSIS)',
-    size: '~12 MB',
+    size: '~5.5 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_x64-setup.exe`,
   },
   {
     icon: Laptop,
     name: 'Linux',
     arch: 'x64',
     format: '.deb / .rpm / .AppImage',
-    size: '~14 MB',
+    size: '~10 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_amd64.deb`,
     note: '取决于发行版',
   },
 ];
@@ -89,9 +96,7 @@ export default function Download() {
                 {platform.format} · {platform.size}
               </p>
               <a
-                href="https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/latest"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={platform.href}
                 className="w-full bg-primary text-primary-fg py-2.5 rounded-[10px] text-sm font-semibold hover:bg-primary-hover transition-colors flex items-center justify-center gap-2"
               >
                 <DownloadIcon className="w-4 h-4" />
