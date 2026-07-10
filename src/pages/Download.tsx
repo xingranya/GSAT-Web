@@ -145,7 +145,7 @@ export default function Download() {
                 <li>后续启动将不再需要此步骤</li>
               </ol>
               <p className="text-xs text-muted">
-                或者在终端运行：<code className="px-1.5 py-0.5 rounded bg-surface-hover font-mono text-[12px]">xattr -cr /Applications/GitHub\ Stars\ AI.app</code>
+                或者在终端运行：<code className="px-1.5 py-0.5 rounded bg-surface-hover font-mono text-[12px]">sudo xattr -cr /Applications/GitHub-Stars-AI-Tools.app</code>
               </p>
             </div>
           </motion.div>
