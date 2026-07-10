@@ -2,7 +2,7 @@ import { Monitor, Laptop, Download as DownloadIcon, Shield, AlertTriangle, Exter
 import { motion } from 'motion/react';
 import type { LucideIcon } from 'lucide-react';
 
-const RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.1.2';
+const RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.2.0';
 
 interface Platform {
   icon: LucideIcon;
@@ -20,32 +20,32 @@ const PLATFORMS: Platform[] = [
     name: 'macOS',
     arch: 'Apple Silicon (M1+)',
     format: '.dmg',
-    size: '~7.6 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_aarch64.dmg`,
+    size: '~7.8 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_aarch64.dmg`,
   },
   {
     icon: Monitor,
     name: 'macOS',
     arch: 'Intel',
     format: '.dmg',
-    size: '~8 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_x64.dmg`,
+    size: '~8.2 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_x64.dmg`,
   },
   {
     icon: Monitor,
     name: 'Windows',
     arch: 'x64',
     format: '.exe (NSIS)',
-    size: '~5.5 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_x64-setup.exe`,
+    size: '~5.8 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_x64-setup.exe`,
   },
   {
     icon: Laptop,
     name: 'Linux',
     arch: 'x64',
     format: '.deb / .rpm / .AppImage',
-    size: '~10 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.1.2_amd64.deb`,
+    size: '~9.8 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_amd64.deb`,
     note: '取决于发行版',
   },
 ];
