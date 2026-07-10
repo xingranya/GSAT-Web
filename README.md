@@ -28,8 +28,8 @@ npm run build
 
 | 路由 | 页面 | 说明 |
 |------|------|------|
-| `/` | 首页 | Hero + 产品演示 + 6 大功能 + 工作原理 + 技术栈 + CTA |
-| `/features` | 功能详情 | 6 大核心功能深度介绍，每个带 CSS 可视化预览 |
+| `/` | 首页 | Hero + 产品演示 + 8 大功能 + 工作原理 + 技术栈 + CTA |
+| `/features` | 功能详情 | 8 大核心功能深度介绍，每项对应真实产品页面截图 |
 | `/architecture` | 技术架构 | 多 AI 提供商、SQLite 存储、三层架构等 |
 | `/developer` | 开发者中心 | GitHub 仓库、文档、Monorepo 结构、开源许可 |
 | `/download` | 下载 | macOS / Windows / Linux 多平台下载 + 安装指引 |

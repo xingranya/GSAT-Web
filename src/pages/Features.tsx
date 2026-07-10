@@ -1,6 +1,6 @@
 import {
   BookOpen, Search, Tags, Radar, GitFork, Shield,
-  Check,
+  Check, LayoutDashboard, Trophy, Settings2,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { LucideIcon } from 'lucide-react';
@@ -15,23 +15,44 @@ interface FeatureDetail {
   /** 预览截图路径 */
   screenshot: string;
   screenshotAlt: string;
+  screenshotWidth: number;
+  screenshotHeight: number;
 }
 
 const FEATURES: FeatureDetail[] = [
   {
+    icon: LayoutDashboard,
+    title: '数据概览',
+    subtitle: '重要信息，打开即见',
+    description:
+      '首页集中呈现收藏规模、AI 摘要进度、README 缓存率、标签与笔记数量、语言分布及同步状态。无需翻找多个页面，即可掌握知识库的最新变化。',
+    highlights: [
+      '收藏、缓存、AI 用量关键指标集中展示',
+      '语言分布与常用技术栈快速访问',
+      '同步状态和最近收藏实时可见',
+      '一键进入同步与仓库管理流程',
+    ],
+    screenshot: '/screenshots/dashboard.png',
+    screenshotAlt: '数据概览页',
+    screenshotWidth: 2922,
+    screenshotHeight: 2332,
+  },
+  {
     icon: BookOpen,
     title: 'Stars 本地知识库',
-    subtitle: '您收藏的一切，尽在掌握',
+    subtitle: '从收藏列表到可读知识',
     description:
-      '一键同步 GitHub Stars 到本地 SQLite 数据库。自动抓取仓库元数据、Topics、语言分布和 README 内容。三层数据分离架构：GitHub 事实、用户标注和 AI 分析结果独立存储，互不干扰。',
+      '一键同步 GitHub Stars 到本地 SQLite 数据库，自动抓取仓库元数据、Topics、语言和 README。中间区域保留原文阅读体验，右侧生成中文摘要、项目画像与结构化知识卡。',
     highlights: [
-      '全量同步 + 增量更新，断点续传',
-      '内容哈希去重，避免重复 AI 调用',
-      '支持自定义标签、笔记和阅读状态',
-      '通过私有 Gist 跨设备同步标注',
+      'README 原文、本地缓存与 AI 解析同屏查看',
+      '自动生成中文摘要和项目画像',
+      '批量抓取、批量分析与失败结果留存',
+      '标签、笔记和阅读状态统一管理',
     ],
-    screenshot: '/screenshots/mainpage.png',
-    screenshotAlt: 'Stars 本地知识库主界面',
+    screenshot: '/screenshots/knowledge-base.png',
+    screenshotAlt: 'Stars 本地知识库与 README 智能解析页',
+    screenshotWidth: 2930,
+    screenshotHeight: 1840,
   },
   {
     icon: Search,
@@ -45,23 +66,10 @@ const FEATURES: FeatureDetail[] = [
       '右侧实时展示匹配仓库，支持分页',
       '基于上下文的连续追问',
     ],
-    screenshot: '/screenshots/aiResearch.png',
+    screenshot: '/screenshots/ai-search.png',
     screenshotAlt: '对话式 AI 搜索界面',
-  },
-  {
-    icon: BookOpen,
-    title: 'README 智能解析',
-    subtitle: '英文 README，中文秒懂',
-    description:
-      'AI 自动读取每个项目的 README，生成中文摘要、关键词和推荐标签。流式输出实时预览，快速判断项目是否值得深入。再也不用逐个打开仓库阅读大段英文文档。',
-    highlights: [
-      '流式 AI 输出，实时预览',
-      '生成中文摘要 + 关键词 + 标签建议',
-      '知识卡片一目了然',
-      'Token 用量追踪，成本可控',
-    ],
-    screenshot: '/screenshots/Knowledge.png',
-    screenshotAlt: 'README 智能解析界面',
+    screenshotWidth: 2940,
+    screenshotHeight: 1844,
   },
   {
     icon: Tags,
@@ -75,8 +83,10 @@ const FEATURES: FeatureDetail[] = [
       '标签网络可视化展示',
       '按标签筛选和批量管理',
     ],
-    screenshot: '/screenshots/taps.png',
+    screenshot: '/screenshots/tag-network.png',
     screenshotAlt: 'AI 标签网络可视化',
+    screenshotWidth: 2940,
+    screenshotHeight: 1844,
   },
   {
     icon: GitFork,
@@ -90,8 +100,27 @@ const FEATURES: FeatureDetail[] = [
       '候选项目一键入库',
       '比较分析帮助决策',
     ],
-    screenshot: '/screenshots/setting.png',
-    screenshotAlt: 'AI 服务与搜索配置',
+    screenshot: '/screenshots/discover.png',
+    screenshotAlt: '相似项目发现与 README 对比页',
+    screenshotWidth: 2940,
+    screenshotHeight: 1844,
+  },
+  {
+    icon: Trophy,
+    title: '开源排行榜',
+    subtitle: '从公开趋势中发现优质项目',
+    description:
+      '聚合 GitHub 公开搜索结果，按趋势、新锐和热门维度查看项目。支持语言筛选、榜单刷新、项目介绍与一键加入 Stars，让个人收藏不再局限于已有关注范围。',
+    highlights: [
+      '趋势榜、新锐榜和热门榜多维浏览',
+      '按语言筛选公开项目',
+      '仓库指标、Topics 与更新时间同屏比较',
+      '查看介绍或直接加入 GitHub Stars',
+    ],
+    screenshot: '/screenshots/rankings.png',
+    screenshotAlt: 'GitHub 开源项目排行榜页',
+    screenshotWidth: 2940,
+    screenshotHeight: 1844,
   },
   {
     icon: Radar,
@@ -107,6 +136,25 @@ const FEATURES: FeatureDetail[] = [
     ],
     screenshot: '/screenshots/profile.png',
     screenshotAlt: '个人技术画像概览',
+    screenshotWidth: 2934,
+    screenshotHeight: 2584,
+  },
+  {
+    icon: Settings2,
+    title: '连接与数据管理',
+    subtitle: '状态清晰，维护集中',
+    description:
+      '在设置页统一管理 GitHub 连接、客户端就绪状态、README 缓存和标签网络。真实链路自检会逐项确认本地能力是否可用，并提供对应的数据补齐与同步操作。',
+    highlights: [
+      'GitHub Token 连接状态与账号信息可见',
+      'Stars、README、AI 摘要和标签网络逐项自检',
+      '同步、补抓和重新生成操作集中管理',
+      'Token 安全写入系统凭证管理器',
+    ],
+    screenshot: '/screenshots/setting.png',
+    screenshotAlt: 'GitHub 连接、客户端状态和数据同步设置页',
+    screenshotWidth: 2412,
+    screenshotHeight: 2900,
   },
 ];
 
@@ -151,6 +199,8 @@ function FeatureSection({ feature, index }: { key?: string; feature: FeatureDeta
             alt={feature.screenshotAlt}
             className="w-full h-auto block"
             loading="lazy"
+            width={feature.screenshotWidth}
+            height={feature.screenshotHeight}
           />
         </div>
       </div>
@@ -178,7 +228,7 @@ export default function Features() {
             transition={{ duration: 0.5, delay: 0.08 }}
             className="text-muted text-[clamp(0.95rem,1.3vw,1.06rem)] mt-4 leading-relaxed"
           >
-            从同步到搜索，从解析到发现——六大核心功能构建完整的 Stars 知识管理体验
+            从同步、解析到搜索与发现，八大核心功能构建完整的 Stars 知识管理体验
           </motion.p>
         </div>
       </section>

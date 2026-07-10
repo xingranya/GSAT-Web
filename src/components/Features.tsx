@@ -1,5 +1,5 @@
 import {
-  Search, BookOpen, Tags, Radar, GitFork,
+  Search, BookOpen, Tags, Radar, GitFork, Trophy, Settings2,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { LucideIcon } from 'lucide-react';
@@ -106,6 +106,11 @@ const FEATURES = [
     description: '基于已收藏的项目，AI 在 GitHub 上搜索并推荐相似的替代方案。永远不错过更好的选择。',
   },
   {
+    icon: Trophy,
+    title: '开源排行榜',
+    description: '浏览趋势、新锐和热门开源项目，按语言筛选并查看仓库指标，一键加入 GitHub Stars。',
+  },
+  {
     icon: Radar,
     title: '个人技术画像',
     description: '基于 Star 历史和使用模式，生成您的技术栈画像、成长趋势和领域偏好分析。了解自己的技术全景。',
@@ -134,6 +139,11 @@ const FEATURES = [
         ))}
       </div>
     ),
+  },
+  {
+    icon: Settings2,
+    title: '连接与数据管理',
+    description: '统一检查 GitHub 连接与本地数据状态，集中完成同步、README 补抓和标签网络生成。',
   },
 ];
 
@@ -177,7 +187,7 @@ export default function Features() {
             transition={{ duration: 0.5, delay: 0.08 }}
             className="text-muted text-[clamp(0.95rem,1.3vw,1.06rem)] mt-4 max-w-xl mx-auto leading-relaxed"
           >
-            六大核心能力，将散落的收藏转化为结构化的个人技术知识库
+            八大核心能力，将散落的收藏转化为结构化的个人技术知识库
           </motion.p>
         </div>
 

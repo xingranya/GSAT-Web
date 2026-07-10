@@ -17,12 +17,12 @@ function ProductMockup() {
     >
       <div className="rounded-[14px] border border-border-strong shadow-lg overflow-hidden">
         <img
-          src="/screenshots/mainpage.png"
-          alt="GitHub Stars AI 主界面 — 仓库知识库和 AI 分析"
+          src="/screenshots/dashboard.png"
+          alt="GitHub Stars AI 数据概览页，展示收藏仓库、AI 用量、语言分布和同步状态"
           className="w-full h-auto block"
           loading="eager"
-          width={960}
-          height={540}
+          width={2922}
+          height={2332}
         />
       </div>
     </motion.div>
