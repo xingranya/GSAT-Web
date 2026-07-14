@@ -26,6 +26,14 @@ const PLATFORMS: Platform[] = [
   },
   {
     icon: Monitor,
+    name: 'macOS',
+    arch: 'Intel',
+    format: '.dmg',
+    size: '~8.4 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_x64.dmg`,
+  },
+  {
+    icon: Monitor,
     name: 'Windows',
     arch: 'x64',
     format: '.exe (NSIS)',
