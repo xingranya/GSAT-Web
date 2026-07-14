@@ -104,7 +104,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden fixed top-16 right-0 bottom-0 left-0 z-40 bg-[var(--c-bg)] border-t border-border"
+            className="glass-mobile-menu md:hidden fixed top-16 right-0 bottom-0 left-0 z-40 border-t border-border"
           >
             <nav className="flex flex-col p-6 gap-1">
               {NAV_ITEMS.map(({ icon: Icon, ...item }) => (

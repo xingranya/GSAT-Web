@@ -33,6 +33,7 @@ npm run build
 | `/architecture` | 技术架构 | 多 AI 提供商、SQLite 存储、三层架构等 |
 | `/developer` | 开发者中心 | GitHub 仓库、文档、Monorepo 结构、开源许可 |
 | `/download` | 下载 | macOS / Windows / Linux 多平台下载 + 安装指引 |
+| `/changelog` | 更新日志 | 查看各版本的功能变化与优化内容 |
 
 ## 关联项目
 

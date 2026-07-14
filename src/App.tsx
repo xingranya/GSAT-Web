@@ -7,6 +7,7 @@ import Features from './pages/Features';
 import Architecture from './pages/Architecture';
 import Developer from './pages/Developer';
 import Download from './pages/Download';
+import Changelog from './pages/Changelog';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/architecture" element={<Architecture />} />
             <Route path="/developer" element={<Developer />} />
             <Route path="/download" element={<Download />} />
+            <Route path="/changelog" element={<Changelog />} />
           </Routes>
         </main>
         <Footer />

@@ -8,6 +8,7 @@ const FOOTER_LINKS = [
       { label: '功能介绍', to: '/features' },
       { label: '技术架构', to: '/architecture' },
       { label: '下载安装', to: '/download' },
+      { label: '更新日志', to: '/changelog' },
     ],
   },
   {

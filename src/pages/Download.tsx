@@ -1,8 +1,9 @@
-import { Monitor, Laptop, Download as DownloadIcon, Shield, AlertTriangle, ExternalLink } from 'lucide-react';
+import { Monitor, Laptop, Download as DownloadIcon, Shield, AlertTriangle, ExternalLink, History } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 
-const RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.2.0';
+const RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.3.0';
 
 interface Platform {
   icon: LucideIcon;
@@ -20,33 +21,25 @@ const PLATFORMS: Platform[] = [
     name: 'macOS',
     arch: 'Apple Silicon (M1+)',
     format: '.dmg',
-    size: '~7.8 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_aarch64.dmg`,
-  },
-  {
-    icon: Monitor,
-    name: 'macOS',
-    arch: 'Intel',
-    format: '.dmg',
-    size: '~8.2 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_x64.dmg`,
+    size: '~8.1 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_aarch64.dmg`,
   },
   {
     icon: Monitor,
     name: 'Windows',
     arch: 'x64',
     format: '.exe (NSIS)',
-    size: '~5.8 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_x64-setup.exe`,
+    size: '~6.1 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_x64-setup.exe`,
   },
   {
     icon: Laptop,
     name: 'Linux',
     arch: 'x64',
     format: '.deb / .rpm / .AppImage',
-    size: '~9.8 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.2.0_amd64.deb`,
-    note: '取决于发行版',
+    size: '~10.0 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_amd64.deb`,
+    note: '另提供 .rpm / .AppImage',
   },
 ];
 
@@ -72,6 +65,13 @@ export default function Download() {
           >
             支持 macOS、Windows 和 Linux。免费使用，本地运行，数据不出您的设备。
           </motion.p>
+          <Link
+            to="/changelog"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+          >
+            <History className="w-4 h-4" />
+            v1.3.0 更新内容
+          </Link>
         </div>
       </section>
 
