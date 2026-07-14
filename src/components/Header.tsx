@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Github, Menu, X, Download, BookOpen } from 'lucide-react';
+import {
+  BookOpen, Code2, Download, Github, Home, LayoutGrid, Menu, Network, X,
+} from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 
 const NAV_ITEMS = [
-  { to: '/', label: '首页' },
-  { to: '/features', label: '功能' },
-  { to: '/architecture', label: '架构' },
-  { to: '/developer', label: '开发者' },
-  { to: '/download', label: '下载' },
+  { to: '/', label: '首页', icon: Home },
+  { to: '/features', label: '功能', icon: LayoutGrid },
+  { to: '/architecture', label: '架构', icon: Network },
+  { to: '/developer', label: '开发者', icon: Code2 },
+  { to: '/download', label: '下载', icon: Download },
 ];
 
 export default function Header() {
@@ -22,8 +24,8 @@ export default function Header() {
 
   const getNavClass = ({ isActive }: { isActive: boolean }) =>
     isActive
-      ? 'text-primary font-semibold text-sm transition-colors'
-      : 'text-muted hover:text-foreground transition-colors text-sm';
+      ? 'bg-primary-soft text-primary font-semibold'
+      : 'bg-background/55 text-muted hover:bg-primary-soft/75 hover:text-foreground';
 
   return (
     <header className="fixed top-0 w-full z-50 glass-nav">
@@ -37,9 +39,15 @@ export default function Header() {
         </Link>
 
         {/* 桌面导航 */}
-        <nav className="hidden md:flex items-center gap-7">
-          {NAV_ITEMS.map(item => (
-            <NavLink key={item.to} className={getNavClass} to={item.to} end={item.to === '/'}>
+        <nav className="hidden md:flex items-center gap-2">
+          {NAV_ITEMS.map(({ icon: Icon, ...item }) => (
+            <NavLink
+              key={item.to}
+              className={({ isActive }) => `inline-flex items-center gap-1.5 rounded-[10px] px-3 py-2 text-sm transition-colors ${getNavClass({ isActive })}`}
+              to={item.to}
+              end={item.to === '/'}
+            >
+              <Icon className="w-3.5 h-3.5" aria-hidden="true" />
               {item.label}
             </NavLink>
           ))}
@@ -97,20 +105,21 @@ export default function Header() {
             className="md:hidden fixed inset-0 top-16 bg-background z-40 border-t border-border"
           >
             <nav className="flex flex-col p-6 gap-1">
-              {NAV_ITEMS.map(item => (
+              {NAV_ITEMS.map(({ icon: Icon, ...item }) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   end={item.to === '/'}
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
-                    `px-4 py-3 rounded-[10px] text-base font-medium transition-colors ${
+                    `flex items-center gap-2 px-4 py-3 rounded-[10px] text-base font-medium transition-colors ${
                       isActive
                         ? 'bg-primary-soft text-primary'
                         : 'text-foreground hover:bg-muted-bg'
                     }`
                   }
                 >
+                  <Icon className="w-4 h-4" aria-hidden="true" />
                   {item.label}
                 </NavLink>
               ))}
