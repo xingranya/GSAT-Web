@@ -91,15 +91,15 @@ body {
   background: oklch(1.000 0.002 260 / 0.72);
   border: 1px solid oklch(0.910 0.007 260 / 0.72);
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(18px) saturate(1.35);
   -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(20px) saturate(1.35);
 }
 
 .glass-nav {
   /* 保持半透明，才能让滚动内容在导航下方形成可见的毛玻璃效果 */
   background: oklch(1.000 0 0 / 0.64);
-  backdrop-filter: blur(20px) saturate(1.8);
   -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  backdrop-filter: blur(24px) saturate(1.8);
   border-bottom: 1px solid oklch(0.910 0.007 260 / 0.70);
 }
 
