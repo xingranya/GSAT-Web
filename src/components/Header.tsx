@@ -28,8 +28,9 @@ export default function Header() {
       : 'bg-background/55 text-muted hover:bg-primary-soft/75 hover:text-foreground';
 
   return (
-    <header className="fixed top-0 w-full z-50 glass-nav">
-      <div className="flex justify-between items-center h-16 px-5 lg:px-8 max-w-[1200px] mx-auto">
+    <>
+      <header className="fixed top-0 w-full z-50 glass-nav">
+        <div className="flex justify-between items-center h-16 px-5 lg:px-8 max-w-[1200px] mx-auto">
         {/* 品牌 */}
         <Link to="/" className="flex items-center gap-2.5 group">
           <img src="/icon.svg" alt="GSAT" className="w-8 h-8 rounded-lg group-hover:scale-105 transition-transform" />
@@ -92,7 +93,8 @@ export default function Header() {
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </div>
+        </div>
+      </header>
 
       {/* 移动端全屏菜单 */}
       <AnimatePresence>
@@ -102,7 +104,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden fixed inset-0 top-16 bg-background z-40 border-t border-border"
+            className="md:hidden fixed top-16 right-0 bottom-0 left-0 z-40 bg-[var(--c-bg)] border-t border-border"
           >
             <nav className="flex flex-col p-6 gap-1">
               {NAV_ITEMS.map(({ icon: Icon, ...item }) => (
@@ -158,6 +160,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
