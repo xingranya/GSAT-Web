@@ -28,10 +28,18 @@ const FOOTER_LINKS = [
     ],
   },
   {
-    title: '法律',
+    title: '支持',
     links: [
-      { label: '开源许可', to: '/license' },
-      { label: '隐私政策', to: '/privacy' },
+      {
+        label: '开源许可',
+        href: 'https://github.com/xingranya/GitHub-Stars-AI-Tools/blob/main/LICENSE',
+        external: true,
+      },
+      {
+        label: '问题反馈',
+        href: 'https://github.com/xingranya/GitHub-Stars-AI-Tools/issues',
+        external: true,
+      },
     ],
   },
 ];

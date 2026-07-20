@@ -1,7 +1,8 @@
 import {
-  Search, BookOpen, Tags, Radar, GitFork, Trophy, Settings2,
+  Search, BookOpen, Tags, GitFork, FileText, ArrowRight,
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 
@@ -33,12 +34,12 @@ function FeatureCard({ icon: Icon, title, description, preview, delay = 0 }: Fea
   );
 }
 
-/** 全部功能数据 */
+/** 精选功能数据：完整八大功能见 /features 页面 */
 const FEATURES = [
   {
     icon: BookOpen,
     title: 'Stars 本地知识库',
-    description: '一键同步 GitHub Stars 到本地 SQLite 数据库。每个仓库自动抓取元数据、Topics、语言分布和 README，构建完整的本地索引。',
+    description: '一键同步 GitHub Stars 到本地 SQLite 数据库，自动抓取元数据、Topics、语言分布和 README，构建完整的本地索引。',
     preview: (
       <div className="bg-background rounded-[10px] border border-border p-4 space-y-2">
         <div className="flex items-center gap-2 text-xs font-mono">
@@ -60,19 +61,14 @@ const FEATURES = [
     ),
   },
   {
-    icon: Search,
-    title: '对话式 AI 搜索',
-    description: '用自然语言描述需求，AI 理解您的真实意图，在知识库中精准匹配。支持追问和上下文关联。',
-  },
-  {
-    icon: BookOpen,
+    icon: FileText,
     title: 'README 智能解析',
     description: 'AI 自动提取 README 核心信息，生成中文摘要、关键词和推荐标签。流式输出，实时预览。',
     preview: (
       <div className="bg-background rounded-[10px] border border-border p-4">
         <div className="flex items-start gap-3">
           <div className="w-5 h-5 rounded-md bg-primary flex items-center justify-center shrink-0 mt-0.5">
-            <BookOpen className="w-3 h-3 text-primary-fg" />
+            <FileText className="w-3 h-3 text-primary-fg" />
           </div>
           <div>
             <div className="text-sm font-semibold text-foreground mb-1">tokio-rs/tokio</div>
@@ -104,46 +100,6 @@ const FEATURES = [
     icon: GitFork,
     title: '相似项目发现',
     description: '基于已收藏的项目，AI 在 GitHub 上搜索并推荐相似的替代方案。永远不错过更好的选择。',
-  },
-  {
-    icon: Trophy,
-    title: '开源排行榜',
-    description: '浏览趋势、新锐和热门开源项目，按语言筛选并查看仓库指标，一键加入 GitHub Stars。',
-  },
-  {
-    icon: Radar,
-    title: '个人技术画像',
-    description: '基于 Star 历史和使用模式，生成您的技术栈画像、成长趋势和领域偏好分析。了解自己的技术全景。',
-    preview: (
-      <div className="flex flex-wrap gap-4 justify-center">
-        {[
-          { label: 'Rust', value: 34, color: 'bg-[oklch(0.55_0.12_25)]' },
-          { label: 'TypeScript', value: 28, color: 'bg-[oklch(0.55_0.15_250)]' },
-          { label: 'Python', value: 18, color: 'bg-[oklch(0.65_0.15_80)]' },
-          { label: 'Go', value: 12, color: 'bg-[oklch(0.60_0.12_170)]' },
-          { label: '其他', value: 8, color: 'bg-muted' },
-        ].map(item => (
-          <div key={item.label} className="flex items-center gap-3 min-w-[160px]">
-            <span className="text-xs text-muted w-20 text-right">{item.label}</span>
-            <div className="flex-1 h-2 rounded-full bg-border overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: `${item.value}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className={`h-full rounded-full ${item.color}`}
-              />
-            </div>
-            <span className="text-xs font-mono text-muted w-8">{item.value}%</span>
-          </div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    icon: Settings2,
-    title: '连接与数据管理',
-    description: '统一检查 GitHub 连接与本地数据状态，集中完成同步、README 补抓和标签网络生成。',
   },
 ];
 
@@ -187,12 +143,47 @@ export default function Features() {
             transition={{ duration: 0.5, delay: 0.08 }}
             className="text-muted text-[clamp(0.95rem,1.3vw,1.06rem)] mt-4 max-w-xl mx-auto leading-relaxed"
           >
-            八大核心能力，将散落的收藏转化为结构化的个人技术知识库
+            精选核心能力，将散落的收藏转化为结构化的个人技术知识库
           </motion.p>
         </div>
 
-        {/* 功能网格 — 1列 / 2列 / 3列 响应式 */}
+        {/* Bento 网格：大卡带截图 + 四张精选小卡 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* 大卡：对话式 AI 搜索 + 本地向量检索 */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="md:col-span-2 bg-card rounded-[14px] border border-card-border shadow-md p-7 flex flex-col group hover:border-primary/25 hover:shadow-[var(--shadow-glow)] transition-all duration-300"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-[10px] bg-primary-soft flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Search className="w-5 h-5 text-primary" />
+              </div>
+              <span className="text-[11px] font-medium text-primary px-2.5 py-1 rounded-full bg-primary-soft border border-primary/10">
+                v1.5 全新升级
+              </span>
+            </div>
+            <h3 className="font-heading text-lg font-bold text-ink-heading mb-2">
+              对话式 AI 搜索 · 本地向量检索
+            </h3>
+            <p className="text-sm text-muted leading-relaxed max-w-lg">
+              内置中英双语向量模型，首次启用自动完成模型下载与索引构建，之后语义检索可完全离线运行。
+              本地召回候选、AI 二次筛选，自然语言描述即可精准找回真正需要的项目。
+            </p>
+            <div className="mt-5 rounded-[10px] border border-border overflow-hidden shadow-sm">
+              <img
+                src="/screenshots/ai-search.png"
+                alt="对话式 AI 搜索界面，左侧为 AI 对话，右侧为匹配的仓库结果"
+                className="w-full h-auto block"
+                loading="lazy"
+                width={2940}
+                height={1844}
+              />
+            </div>
+          </motion.div>
+
           {FEATURES.map((feat, i) => (
             <FeatureCard
               key={feat.title}
@@ -200,10 +191,27 @@ export default function Features() {
               title={feat.title}
               description={feat.description}
               preview={feat.preview}
-              delay={i * 0.08}
+              delay={(i + 1) * 0.08}
             />
           ))}
         </div>
+
+        {/* 引导到功能页查看完整能力 */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mt-10"
+        >
+          <Link
+            to="/features"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
+          >
+            查看全部八大核心功能
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

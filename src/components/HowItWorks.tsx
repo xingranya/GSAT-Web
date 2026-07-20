@@ -7,9 +7,6 @@ interface StepData {
   title: string;
   detail: string;
   caption: string;
-  /** 动画入场方向：左或右 */
-  direction: 'left' | 'right';
-  delay: number;
 }
 
 const steps: StepData[] = [
@@ -18,69 +15,25 @@ const steps: StepData[] = [
     title: '连接您的 GitHub',
     detail: '粘贴 Personal Access Token，仅需只读权限',
     caption: '凭证保存在系统密钥链中，不上传任何服务器',
-    direction: 'left',
-    delay: 0,
   },
   {
     icon: RefreshCw,
     title: '一键同步所有 Stars',
     detail: '自动抓取 README、技术栈、活跃度等元数据',
     caption: '构建专属于您的本地仓库知识库',
-    direction: 'right',
-    delay: 0.08,
   },
   {
     icon: Sparkles,
     title: 'AI 为每个项目生成卡片',
     detail: '中文摘要、标签分类、知识图谱一键生成',
     caption: '之后用自然语言搜索，找到真正需要的项目',
-    direction: 'left',
-    delay: 0.16,
   },
 ];
-
-/** 交替布局的步骤项 */
-function StepRow({ icon: Icon, title, detail, caption, direction, delay }: StepData) {
-  const isLeft = direction === 'left';
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.92, x: isLeft ? -32 : 32 }}
-      whileInView={{ opacity: 1, scale: 1, x: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={`flex items-start gap-5 ${
-        isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-      } flex-col`}
-    >
-      {/* 图标容器 */}
-      <div className="shrink-0 w-14 h-14 rounded-2xl bg-primary-soft flex items-center justify-center">
-        <Icon className="w-6 h-6 text-primary" />
-      </div>
-
-      {/* 文案 */}
-      <div
-        className={`flex-1 max-w-[420px] ${
-          isLeft ? 'md:text-left' : 'md:text-right'
-        } text-center md:text-inherit`}
-      >
-        <h3 className="font-heading text-xl font-bold text-ink-heading mb-1.5">
-          {title}
-        </h3>
-        <p className="text-sm text-ink-body leading-relaxed">{detail}</p>
-        <p className="text-xs text-muted mt-2">{caption}</p>
-      </div>
-
-      {/* 填充空间，推挤文案到对侧（仅桌面） */}
-      <div className="hidden md:block flex-1" />
-    </motion.div>
-  );
-}
 
 export default function HowItWorks() {
   return (
     <section className="py-[clamp(3.5rem,7vw,6rem)] bg-surface">
-      <div className="max-w-[900px] mx-auto px-5 lg:px-8">
+      <div className="max-w-[1200px] mx-auto px-5 lg:px-8">
         {/* 标题 */}
         <div className="text-center mb-16">
           <motion.h2
@@ -103,10 +56,31 @@ export default function HowItWorks() {
           </motion.p>
         </div>
 
-        {/* 交替步骤 */}
-        <div className="flex flex-col gap-14">
-          {steps.map((step) => (
-            <StepRow key={step.title} {...step} />
+        {/* 横向步骤卡：序号 + 图标 + 文案 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.55, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="glass-panel rounded-[14px] p-7 flex flex-col group hover:border-primary/25 hover:shadow-[var(--shadow-glow)] transition-all duration-300"
+            >
+              <div className="flex items-start justify-between mb-5">
+                <div className="w-14 h-14 rounded-2xl bg-primary-soft flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <step.icon className="w-6 h-6 text-primary" />
+                </div>
+                <span className="font-heading text-3xl font-extrabold text-primary/15 select-none" aria-hidden="true">
+                  0{i + 1}
+                </span>
+              </div>
+              <h3 className="font-heading text-xl font-bold text-ink-heading mb-1.5">
+                {step.title}
+              </h3>
+              <p className="text-sm text-foreground leading-relaxed">{step.detail}</p>
+              <p className="text-xs text-muted mt-2">{step.caption}</p>
+            </motion.div>
           ))}
         </div>
       </div>

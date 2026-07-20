@@ -1,11 +1,11 @@
-import { Github, ArrowRight, Shield, Database, Sparkles } from 'lucide-react';
+import { Download, ArrowRight, Shield, Database, Sparkles } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import { Link } from 'react-router-dom';
 
 /** 缓动曲线：快速启动，平滑收束 */
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** 产品截图展示 */
+/** 产品截图展示（截图本身已含 macOS 窗口红绿灯，直接干净边框即可） */
 function ProductMockup() {
   const reducedMotion = useReducedMotion();
   return (
@@ -68,6 +68,14 @@ export default function Hero() {
     <section className="relative overflow-hidden">
       {/* 背景装饰 */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* 细网格纹理：避开顶部导航毛玻璃区域，向下渐隐 */}
+        <div
+          className="absolute inset-0 bg-grid"
+          style={{
+            maskImage: 'linear-gradient(to bottom, transparent 0%, black 22%, black 70%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 22%, black 70%, transparent 100%)',
+          }}
+        />
         {/* 主光斑 */}
         <div
           className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[500px]"
@@ -118,7 +126,7 @@ export default function Hero() {
           >
             <motion.span className="inline-block">赋予您的 GitHub Stars</motion.span>
             <br />
-            <motion.span className="inline-block text-primary">第二生命</motion.span>
+            <motion.span className="inline-block text-transparent bg-clip-text bg-linear-to-r from-primary to-accent">第二生命</motion.span>
           </motion.h1>
 
           {/* 副标题和按钮：加大延迟，等标题先落地 */}
@@ -146,7 +154,7 @@ export default function Hero() {
               to="/download"
               className="bg-primary text-primary-fg px-7 py-3.5 rounded-[10px] text-sm font-semibold hover:bg-primary-hover transition-colors shadow-md flex items-center justify-center gap-2"
             >
-              <Github className="w-[18px] h-[18px]" />
+              <Download className="w-[18px] h-[18px]" />
               免费下载
             </Link>
             <Link

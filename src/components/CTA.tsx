@@ -1,4 +1,4 @@
-import { Github, ArrowRight } from 'lucide-react';
+import { Download, ArrowUpRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 
@@ -35,23 +35,25 @@ export default function CTA() {
               准备好重构您的星标库了吗？
             </h2>
             <p className="text-muted text-sm leading-relaxed mb-8">
-              安全连接您的 GitHub 账户，仅需几秒钟，体验前所未有的知识管理方式。
+              免费使用，本地运行，数据不出您的设备。支持 macOS、Windows 和 Linux。
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <Link
                 to="/download"
                 className="bg-primary text-primary-fg px-7 py-3.5 rounded-[10px] text-sm font-semibold hover:bg-primary-hover transition-colors shadow-md flex items-center justify-center gap-2"
               >
-                <Github className="w-[18px] h-[18px]" />
+                <Download className="w-[18px] h-[18px]" />
                 免费下载
               </Link>
-              <Link
-                to="/features"
-                className="bg-background text-foreground px-7 py-3.5 rounded-[10px] text-sm font-semibold border border-border hover:border-border-strong hover:bg-surface-hover transition-colors flex items-center justify-center gap-2"
+              <a
+                href="https://github.com/xingranya/GitHub-Stars-AI-Tools"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-3.5 text-sm font-semibold text-muted hover:text-foreground transition-colors"
               >
-                了解更多
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                查看 GitHub 仓库
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
             </div>
             <p className="text-muted/60 text-[11px] mt-5 font-mono">
               需要只读访问权限 · 随时可撤销 · PolyForm Noncommercial 许可
