@@ -105,7 +105,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-soft border border-primary/15 mb-7"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-medium text-primary">v1.3 已发布 · 视觉焕新 · 本地优先</span>
+            <span className="text-xs font-medium text-primary">v1.5.3 已发布 · 本地向量检索 · 离线可用</span>
           </motion.div>
 
           {/* 主标题：clip-path 从中心展开 */}

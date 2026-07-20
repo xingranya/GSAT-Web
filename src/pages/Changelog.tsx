@@ -1,42 +1,61 @@
 import { ArrowUpRight, CalendarDays, CheckCircle2, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 
-const RELEASE_URL = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/tag/v1.3.0';
+const RELEASE_URL = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/tag/v1.5.3';
 
 const CHANGE_GROUPS = [
   {
-    title: '全新欢迎流程',
+    title: '本地向量检索',
     items: [
-      '统一顶栏、步骤栏和主内容面板，连接 GitHub、同步数据与完成设置的过程更清晰。',
-      '新增知识网络插画，集中说明本地优先、智能检索和 AI 增强三项核心能力。',
-      '针对窄窗口与较低高度优化排版，保证操作区域始终可用。',
+      '新用户默认使用本地 Embedding，首次开启向量检索时会确认约 490 MB 模型下载。',
+      '下载阶段展示真实文件进度，完成后自动校验、加载模型、生成向量并构建索引，就绪后可断网检索。',
+      '修复首次启用时开关无响应、状态闪动恢复，以及未下载模型用户缺少引导的问题。',
     ],
   },
   {
-    title: '知识库与标签网络',
+    title: 'zvec 建库稳定性',
     items: [
-      '知识库调整为更紧凑的三栏工作区，筛选条件可自动换行。',
-      '仓库列表与 AI 项目知识卡支持更稳定的拖动调宽体验。',
-      '标签网络新增热门标签、分组、标签云和热度信息，图谱工具栏更直接。',
+      '修复仓库编号含特殊字符导致整批索引构建失败的问题，主键改用稳定哈希。',
+      '建库失败会正确结束进度并保留可重试信息，不再让界面一直停留在 100%。',
+      'SQLite 继续作为向量事实源，索引损坏或不一致时可重新生成，不影响 Stars、标签、笔记和 AI 摘要。',
     ],
   },
   {
-    title: '搜索、发现与排行榜',
+    title: 'AI 搜索结果一致性',
     items: [
-      'AI 搜索、发现和排行榜统一页面容器、状态样式与信息层级。',
-      '排行榜改为“开源榜单 / 我的 Stars”切换，并保留筛选、分页、刷新和收藏操作。',
+      '搜索改为两阶段筛选：本地向量索引先召回候选，再由 AI 选出真正相关的仓库。',
+      'AI 回答与仓库列表使用同一份结构化结果，不再出现列表之外的项目或为凑数加入的无关结果。',
+      'AI 筛选失败时自动回退到严格的本地证据结果，并给出可操作提示。',
     ],
   },
   {
-    title: '视觉与主题',
+    title: '更清晰的搜索过程',
     items: [
-      '标签网络、AI 搜索、知识库、发现和排行榜采用统一的浅色视觉体系。',
-      '暗色模式同步调整主题变量，切换主题时保持一致的层级与可读性。',
+      '发起新搜索后立即清空上一轮结果，不再提前展示未经 AI 核对的候选仓库。',
+      '依次展示“理解问题、向量召回、核对证据、AI 筛选”阶段，完成后才显示最终仓库。',
+      '进度、空结果、降级和失败状态重新设计，“仍在搜索”与“已得到结果”清晰可辨。',
+    ],
+  },
+  {
+    title: '增量 AI 解析',
+    items: [
+      '“批量 AI”升级为“增量 AI”，只处理尚无 AI 摘要或 README 内容已变化的仓库。',
+      '已是最新状态的仓库在查询阶段直接排除，失败仓库可单独重试且不会回滚已有数据。',
+    ],
+  },
+  {
+    title: '设置体验',
+    items: [
+      '向量检索移动到设置页顶栏独立 Tab，集中展示开关、运行状态、索引数量和模型占用。',
+      '本地向量设置与远程 Embedding 高级配置分层显示，AI 服务卡片信息层级更清晰。',
     ],
   },
 ];
 
 const PREVIOUS_RELEASES = [
+  { version: 'v1.5.1', description: '本地向量检索完整发布：内置中英双语模型、离线语义搜索与自动增量建库。' },
+  { version: 'v1.5.0', description: '首次带来完整本地向量检索能力，中英文自然语言检索可完全离线运行。' },
+  { version: 'v1.3.0', description: '桌面端视觉与信息层级重构：全新欢迎流程、知识库三栏工作区与统一浅色体系。' },
   { version: 'v1.2.0', description: '新增 AI 同类项目推荐、开源排行榜、个人 Stars 榜单与完整分页同步。' },
   { version: 'v1.1.2', description: '完善 AI 配置、本地模型兼容、仓库清单导入导出与概览体验。' },
   { version: 'v1.0.1', description: '首个完整桌面版本，带来 AI 搜索、README 解析与应用内更新。' },
@@ -49,7 +68,7 @@ export default function Changelog() {
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-soft border border-primary/15 text-primary text-xs font-medium">
             <Sparkles className="w-3.5 h-3.5" />
-            最新版本 v1.3.0
+            最新版本 v1.5.3
           </div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -65,7 +84,7 @@ export default function Changelog() {
             transition={{ duration: 0.5, delay: 0.08 }}
             className="mt-4 text-muted text-[clamp(0.95rem,1.3vw,1.06rem)] leading-relaxed"
           >
-            v1.3 聚焦桌面端的视觉与信息层级重构，让管理、发现与检索 Stars 的体验更清晰一致。
+            v1.5 带来完全本地运行的向量检索：内置中英双语模型、离线语义搜索，并让 AI 搜索结果更可靠。
           </motion.p>
         </div>
       </section>
@@ -80,10 +99,10 @@ export default function Changelog() {
         >
           <header className="p-7 md:p-8 border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h2 className="font-heading text-2xl font-extrabold text-ink-heading">v1.3.0</h2>
+              <h2 className="font-heading text-2xl font-extrabold text-ink-heading">v1.5.3</h2>
               <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
                 <CalendarDays className="w-4 h-4" />
-                2026 年 7 月 14 日发布
+                2026 年 7 月 15 日发布
               </p>
             </div>
             <a

@@ -3,7 +3,9 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
 
-const RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.3.0';
+const RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.5.3';
+// macOS Intel 自 v1.5.0 起停止发布，停留在最后兼容版本 v1.3.0
+const LEGACY_RELEASE_BASE = 'https://github.com/xingranya/GitHub-Stars-AI-Tools/releases/download/v1.3.0';
 
 interface Platform {
   icon: LucideIcon;
@@ -21,8 +23,8 @@ const PLATFORMS: Platform[] = [
     name: 'macOS',
     arch: 'Apple Silicon (M1+)',
     format: '.dmg',
-    size: '~8.1 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_aarch64.dmg`,
+    size: '~27.8 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.5.3_aarch64.dmg`,
   },
   {
     icon: Monitor,
@@ -30,23 +32,24 @@ const PLATFORMS: Platform[] = [
     arch: 'Intel',
     format: '.dmg',
     size: '~8.4 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_x64.dmg`,
+    href: `${LEGACY_RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_x64.dmg`,
+    note: '最后兼容版本 v1.3.0',
   },
   {
     icon: Monitor,
     name: 'Windows',
     arch: 'x64',
     format: '.exe (NSIS)',
-    size: '~6.1 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_x64-setup.exe`,
+    size: '~18.0 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.5.3_x64-setup.exe`,
   },
   {
     icon: Laptop,
     name: 'Linux',
     arch: 'x64',
     format: '.deb / .rpm / .AppImage',
-    size: '~10.0 MB',
-    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.3.0_amd64.deb`,
+    size: '~38.5 MB',
+    href: `${RELEASE_BASE}/GitHub-Stars-AI-Tools_1.5.3_amd64.deb`,
     note: '另提供 .rpm / .AppImage',
   },
 ];
@@ -78,7 +81,7 @@ export default function Download() {
             className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
           >
             <History className="w-4 h-4" />
-            v1.3.0 更新内容
+            v1.5.3 更新内容
           </Link>
         </div>
       </section>
@@ -110,6 +113,9 @@ export default function Download() {
                 <DownloadIcon className="w-4 h-4" />
                 下载
               </a>
+              {platform.note && (
+                <p className="text-xs text-muted mt-3">{platform.note}</p>
+              )}
             </motion.div>
           ))}
         </div>
