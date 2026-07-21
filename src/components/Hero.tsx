@@ -1,31 +1,130 @@
+import { useRef } from 'react';
 import { Download, ArrowRight, Shield, Database, Sparkles } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { Link } from 'react-router-dom';
 
 /** 缓动曲线：快速启动，平滑收束 */
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** 产品截图展示（截图本身已含 macOS 窗口红绿灯，直接干净边框即可） */
-function ProductMockup() {
+/** 英雄镜头展示阶段：截图主体随滚动驻留并依次切换 */
+const SHOWCASE_STAGES = [
+  {
+    src: '/screenshots/dashboard.png',
+    alt: 'GitHub Stars AI 数据概览页，展示收藏仓库、AI 用量、语言分布和同步状态',
+    title: '数据概览',
+    desc: '收藏规模、AI 进度与语言分布，打开即见。',
+  },
+  {
+    src: '/screenshots/ai-search.png',
+    alt: '对话式 AI 搜索界面，左侧为 AI 对话，右侧为匹配的仓库结果',
+    title: '对话式 AI 搜索',
+    desc: '自然语言提问，本地向量检索精准召回。',
+  },
+  {
+    src: '/screenshots/tag-network.png',
+    alt: 'AI 标签网络可视化，展示收藏项目之间的标签关联',
+    title: 'AI 标签网络',
+    desc: '自动发现收藏之间的隐藏关联。',
+  },
+] as const;
+
+/**
+ * 滚动驱动的英雄镜头：300vh 滚动区间内截图主体 sticky 驻留，
+ * 随滚动进度交叉切换三个阶段，截图轻微推近，文案与指示点同步过渡。
+ */
+function ScrollShowcase() {
   const reducedMotion = useReducedMotion();
-  return (
-    <motion.div
-      initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 30, scale: 0.97 }}
-      animate={reducedMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
-      className="w-full max-w-[960px] mx-auto mt-16"
-    >
-      <div className="rounded-[14px] border border-border-strong shadow-lg overflow-hidden">
-        <img
-          src="/screenshots/dashboard.png"
-          alt="GitHub Stars AI 数据概览页，展示收藏仓库、AI 用量、语言分布和同步状态"
-          className="w-full h-auto block"
-          loading="eager"
-          width={2922}
-          height={2332}
-        />
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  // 驻留期间缓慢推近，让主体保持“活”的状态
+  const frameScale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+
+  // 三个阶段的不透明度：概览 → AI 搜索 → 标签网络
+  const stageOneOpacity = useTransform(scrollYProgress, [0.30, 0.42], [1, 0]);
+  const stageTwoOpacity = useTransform(scrollYProgress, [0.32, 0.44, 0.58, 0.70], [0, 1, 1, 0]);
+  const stageThreeOpacity = useTransform(scrollYProgress, [0.60, 0.72], [0, 1]);
+  const stageOpacities = [stageOneOpacity, stageTwoOpacity, stageThreeOpacity];
+
+  // 阶段文案：随切换上浮/离场
+  const captionOneY = useTransform(scrollYProgress, [0.30, 0.42], [0, -14]);
+  const captionTwoY = useTransform(scrollYProgress, [0.32, 0.44, 0.58, 0.70], [14, 0, 0, -14]);
+  const captionThreeY = useTransform(scrollYProgress, [0.60, 0.72], [14, 0]);
+  const captionYs = [captionOneY, captionTwoY, captionThreeY];
+
+  // 阶段指示点
+  const dotOneOpacity = useTransform(scrollYProgress, [0.30, 0.42], [1, 0.3]);
+  const dotTwoOpacity = useTransform(scrollYProgress, [0.32, 0.44, 0.58, 0.70], [0.3, 1, 1, 0.3]);
+  const dotThreeOpacity = useTransform(scrollYProgress, [0.60, 0.72], [0.3, 1]);
+  const dotOpacities = [dotOneOpacity, dotTwoOpacity, dotThreeOpacity];
+
+  // 减少动态偏好：退化为单张静态截图
+  if (reducedMotion) {
+    return (
+      <div className="w-full max-w-[960px] mx-auto mt-16">
+        <div className="rounded-[14px] border border-border-strong shadow-lg overflow-hidden">
+          <img
+            src="/screenshots/dashboard.png"
+            alt={SHOWCASE_STAGES[0].alt}
+            className="w-full h-auto block"
+            loading="eager"
+            width={2922}
+            height={2332}
+          />
+        </div>
       </div>
-    </motion.div>
+    );
+  }
+
+  return (
+    <div ref={containerRef} className="relative w-full h-[300vh] mt-10">
+      <div className="sticky top-16 h-[calc(100svh-4rem)] flex flex-col items-center justify-center gap-5 px-5">
+        {/* 截图主体：等比画框，三个阶段交叉淡入淡出 */}
+        <motion.div
+          style={{ scale: frameScale }}
+          className="relative w-full max-w-[980px] aspect-[16/10] max-h-[58vh] rounded-[14px] border border-border-strong shadow-lg overflow-hidden bg-surface"
+        >
+          {SHOWCASE_STAGES.map((stage, i) => (
+            <motion.img
+              key={stage.src}
+              src={stage.src}
+              alt={stage.alt}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              className="absolute inset-0 w-full h-full object-contain"
+              style={{ opacity: stageOpacities[i] }}
+            />
+          ))}
+        </motion.div>
+
+        {/* 阶段文案：同位堆叠，随阶段切换 */}
+        <div className="relative h-16 w-full max-w-[980px] text-center">
+          {SHOWCASE_STAGES.map((stage, i) => (
+            <motion.div
+              key={stage.title}
+              className="absolute inset-0"
+              style={{ opacity: stageOpacities[i], y: captionYs[i] }}
+            >
+              <h3 className="font-heading text-lg font-bold text-ink-heading">{stage.title}</h3>
+              <p className="text-sm text-muted mt-1">{stage.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* 阶段指示点 */}
+        <div className="flex items-center gap-2" aria-hidden="true">
+          {SHOWCASE_STAGES.map((stage, i) => (
+            <motion.span
+              key={stage.src}
+              className="w-1.5 h-1.5 rounded-full bg-primary"
+              style={{ opacity: dotOpacities[i] }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -65,7 +164,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative">
       {/* 背景装饰 */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* 细网格纹理：避开顶部导航毛玻璃区域，向下渐隐 */}
@@ -199,8 +298,8 @@ export default function Hero() {
             </motion.span>
           </motion.div>
 
-          {/* 产品模拟界面 */}
-          <ProductMockup />
+          {/* 滚动驱动的英雄镜头 */}
+          <ScrollShowcase />
         </div>
       </div>
     </section>
