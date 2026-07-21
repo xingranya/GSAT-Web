@@ -41,24 +41,25 @@ function ScrollShowcase() {
   });
 
   // 驻留期间缓慢推近，让主体保持“活”的状态
-  const frameScale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  const frameScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 0.975, 1]);
 
   // 三个阶段的不透明度：概览 → AI 搜索 → 标签网络
-  const stageOneOpacity = useTransform(scrollYProgress, [0.30, 0.42], [1, 0]);
-  const stageTwoOpacity = useTransform(scrollYProgress, [0.32, 0.44, 0.58, 0.70], [0, 1, 1, 0]);
-  const stageThreeOpacity = useTransform(scrollYProgress, [0.60, 0.72], [0, 1]);
+  // 注意：区间必须显式覆盖 [0,1] 全程，两点式区间会在结尾出现异常回绕
+  const stageOneOpacity = useTransform(scrollYProgress, [0, 0.30, 0.42, 1], [1, 1, 0, 0]);
+  const stageTwoOpacity = useTransform(scrollYProgress, [0, 0.32, 0.44, 0.58, 0.70, 1], [0, 0, 1, 1, 0, 0]);
+  const stageThreeOpacity = useTransform(scrollYProgress, [0, 0.60, 0.72, 1], [0, 0, 1, 1]);
   const stageOpacities = [stageOneOpacity, stageTwoOpacity, stageThreeOpacity];
 
   // 阶段文案：随切换上浮/离场
-  const captionOneY = useTransform(scrollYProgress, [0.30, 0.42], [0, -14]);
-  const captionTwoY = useTransform(scrollYProgress, [0.32, 0.44, 0.58, 0.70], [14, 0, 0, -14]);
-  const captionThreeY = useTransform(scrollYProgress, [0.60, 0.72], [14, 0]);
+  const captionOneY = useTransform(scrollYProgress, [0, 0.30, 0.42, 1], [0, 0, -14, -14]);
+  const captionTwoY = useTransform(scrollYProgress, [0, 0.32, 0.44, 0.58, 0.70, 1], [14, 14, 0, 0, -14, -14]);
+  const captionThreeY = useTransform(scrollYProgress, [0, 0.60, 0.72, 1], [14, 14, 0, 0]);
   const captionYs = [captionOneY, captionTwoY, captionThreeY];
 
   // 阶段指示点
-  const dotOneOpacity = useTransform(scrollYProgress, [0.30, 0.42], [1, 0.3]);
-  const dotTwoOpacity = useTransform(scrollYProgress, [0.32, 0.44, 0.58, 0.70], [0.3, 1, 1, 0.3]);
-  const dotThreeOpacity = useTransform(scrollYProgress, [0.60, 0.72], [0.3, 1]);
+  const dotOneOpacity = useTransform(scrollYProgress, [0, 0.30, 0.42, 1], [1, 1, 0.3, 0.3]);
+  const dotTwoOpacity = useTransform(scrollYProgress, [0, 0.32, 0.44, 0.58, 0.70, 1], [0.3, 0.3, 1, 1, 0.3, 0.3]);
+  const dotThreeOpacity = useTransform(scrollYProgress, [0, 0.60, 0.72, 1], [0.3, 0.3, 1, 1]);
   const dotOpacities = [dotOneOpacity, dotTwoOpacity, dotThreeOpacity];
 
   // 减少动态偏好：退化为单张静态截图
@@ -82,10 +83,10 @@ function ScrollShowcase() {
   return (
     <div ref={containerRef} className="relative w-full h-[300vh] mt-10">
       <div className="sticky top-16 h-[calc(100svh-4rem)] flex flex-col items-center justify-center gap-5 px-5">
-        {/* 截图主体：等比画框，三个阶段交叉淡入淡出 */}
+        {/* 截图主体：移动端竖版画框放大裁切中心区，桌面端完整展示 */}
         <motion.div
           style={{ scale: frameScale }}
-          className="relative w-full max-w-[980px] aspect-[16/10] max-h-[58vh] rounded-[14px] border border-border-strong shadow-lg overflow-hidden bg-surface"
+          className="relative w-full max-w-[980px] aspect-[3/4] sm:aspect-[16/10] max-h-[58vh] rounded-[14px] border border-border-strong shadow-lg overflow-hidden bg-surface"
         >
           {SHOWCASE_STAGES.map((stage, i) => (
             <motion.img
@@ -93,7 +94,7 @@ function ScrollShowcase() {
               src={stage.src}
               alt={stage.alt}
               loading={i === 0 ? 'eager' : 'lazy'}
-              className="absolute inset-0 w-full h-full object-contain"
+              className="absolute inset-0 w-full h-full object-cover object-center sm:object-contain"
               style={{ opacity: stageOpacities[i] }}
             />
           ))}
